@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <NavBar/>
-    <router-view></router-view>
+    <div class="jumbotron ml-3 mr-3  ">
+      <NavBar/>
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
