@@ -2,7 +2,7 @@
 
   <section class="get-users">
     <div class="jumbotron">
-      <h2 style="color:white;">Usuarios</h2>
+      <h2 style="color:white;">Get Users</h2>
       <hr>
       <br>
       <button class="btn btn-primary" @click="getUsuariosAsyncAwait()">GetUsers Async/await</button>
@@ -23,6 +23,7 @@
           </tr>
         </tbody>
       </table>
+      <div v-else-if="!asked" class="alert alert-warning">Pida los usuarios con algun metodo GET</div>
       <div v-else class="alert alert-danger">No hay usuarios cargados</div>
     </div>
   </section>
@@ -40,6 +41,7 @@
       return {
         users:[],
         urlMock:'https://609dba3e33eed80017957062.mockapi.io/users',
+        asked:false
       }
     },
     methods: {
@@ -48,6 +50,7 @@
           let respuesta = await this.axios(this.urlMock)
           console.log('ASYNC/AWAIT',respuesta);
           this.users = respuesta.data
+          this.asked=true
         } catch (error) {
           console.error(error);
         }
@@ -58,6 +61,7 @@
         .then(respuesta => {
           console.log("FETCH",respuesta)
           this.users = respuesta
+          this.asked=true
           })
         .catch(error => console.error(error))
       },
